@@ -1,0 +1,102 @@
+package com.pb.ist.education.entity;
+
+import com.pb.ist.education.enums.Address;
+import com.pb.ist.education.enums.IstType;
+import com.pb.ist.education.enums.StaffComposition;
+
+import javax.persistence.Column;
+import javax.persistence.Convert;
+
+/**
+ * @Author: SunCY
+ * @Description: 晋级申请书
+ * @DateTime: 2022/3/31 13:42
+ **/
+public class ApplicationEntity {
+
+    /**
+     * 所在体育组织及职务
+     */
+    @Column(name = "position", columnDefinition = "varchar(255)", nullable = false)
+    private String position;
+
+
+    /**
+     * 市区
+     */
+    @Column(name = "areaId", columnDefinition = "varchar(255)", nullable = false)
+    private String areaId;
+
+    /**
+     * 从哪年开始从事社会体育指导员
+     */
+    @Column(name = "start_year", columnDefinition = "int", nullable = false)
+    private Integer startYear;
+
+    /**
+     * 家庭住址
+     */
+    @Column(name = "home_address", columnDefinition = "int", nullable = false)
+    private Integer homeAddress;
+
+    /**
+     * 邮政编码
+     */
+    @Column(name = "postal_code", columnDefinition = "varchar(255)", nullable = false)
+    private String postalCode;
+
+    /**
+     *
+     * 所在单位或体育组织名称
+     */
+    @Column(name = "organization_name", columnDefinition = "varchar(255)", nullable = false)
+    private String organizationName;
+
+    /**
+     *
+     * 单位地址
+     */
+    @Column(name = "organization_address", columnDefinition = "varchar(255)", nullable = false)
+    private String organizationAddress;
+
+    /**
+     *
+     * 单位联系电话
+     */
+    @Column(name = "organization_phones", columnDefinition = "varchar(255)", nullable = false)
+    private String organizationPhone;
+
+    /**
+     * 从事社会体育工作的经历与主要业绩
+     */
+    @Column(name = "experience", columnDefinition = "varchar(255)", nullable = false)
+    private String experience;
+
+    /**
+     * 于何时何单位获等级运动员、裁判员称号获聘为何等级教练员、体育教师职务
+     */
+    @Column(name = "description", columnDefinition = "varchar(255)", nullable = false)
+    private String description;
+
+    /**
+     * 指导员类型（组织管理，技能指导）
+     */
+    @Convert(converter = IstType.IstTypeConverter.class)
+    @Column(name = "type", columnDefinition = "tinyint", nullable = false)
+    private IstType istType;
+
+    /**
+     * 地区类型
+     */
+    @Convert(converter = Address.AddressConverter.class)
+    @Column(name = "address", columnDefinition = "tinyint", nullable = false)
+    private Address address;
+
+    /**
+     * 人员构成
+     */
+    @Convert(converter = StaffComposition.StaffCompositionConverter.class)
+    @Column(name = "staff_composition", columnDefinition = "tinyint", nullable = false)
+    private StaffComposition staffComposition;
+
+}
