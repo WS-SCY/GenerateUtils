@@ -15,19 +15,74 @@ import java.util.List;
 
 @Slf4j
 public class SpringGenerateUtil {
-    private static String entityCapitalName;
+
+    //第一个 entityCapitalName，第二个 entityName，第三个 EntityDescription
+    private static List<String> entityInfos = new LinkedList<String>();
     private static List<Param> params = new LinkedList<Param>();
 
 
-    public static void read(BufferedReader bufferedReader) throws IOException {
-
-        ResolveUtil.read(bufferedReader,entityCapitalName,params);
-
+    public static void generate() throws IOException {
+        log.info("生成代码开始");
+        read();
+        initial();
+        generateDTO();
+        generateVO();
+        generateAssembler();
+        generateRepository();
+        generateController();
+        generateService();
+        generateServiceImpl();
+        log.info("生成代码结束");
     }
 
-    public static void generate(BufferedReader bufferedReader) throws IOException {
-        log.info("生成代码开始");
-        read(bufferedReader);
-        log.info("生成代码结束");
+    private static void initial() {
+        log.info("初始化");
+        GenerateUtil.initial(entityInfos, params);
+    }
+
+    private static void generateServiceImpl() {
+        log.info("生成ServiceImpl");
+        GenerateUtil.generateServiceImpl();
+    }
+
+    private static void generateService() {
+        log.info("生成Service");
+        GenerateUtil.generateService();
+    }
+
+    private static void generateController() {
+        log.info("生成Controller");
+        GenerateUtil.generateController();
+    }
+
+    private static void generateRepository() {
+        log.info("生成Repository");
+        GenerateUtil.generateRepository();
+    }
+
+    private static void generateAssembler() {
+        log.info("生成Assembler");
+        GenerateUtil.generateAssembler();
+    }
+
+    private static void generateVO() {
+        log.info("生成VO");
+        GenerateUtil.generateVO();
+    }
+
+
+    public static void read() throws IOException {
+        log.info("解析文本信息");
+        ResolveUtil.read(params,entityInfos);
+    }
+
+
+    private static void generateDTO() {
+        log.info("生成DTO");
+        try{
+            GenerateUtil.generateDTO();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

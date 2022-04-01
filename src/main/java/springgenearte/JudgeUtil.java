@@ -17,4 +17,8 @@ public class JudgeUtil {
     public static boolean isEntityName(String lineTextTrimed) {
         return lineTextTrimed.startsWith("public class");
     }
+
+    public static boolean isEntityDescription(String lineTextTrimed) {
+        return lineTextTrimed.startsWith("* @Description");
+    }
 }
