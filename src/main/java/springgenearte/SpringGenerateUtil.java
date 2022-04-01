@@ -48,7 +48,11 @@ public class SpringGenerateUtil {
 
     private static void generateCustomImpl() {
         log.info("生成CustomImpl");
-        GenerateUtil.generateCustomImpl();
+        try {
+            GenerateUtil.generateCustomImpl();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void initial() {

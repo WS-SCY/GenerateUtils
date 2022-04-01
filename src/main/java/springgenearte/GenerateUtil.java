@@ -88,10 +88,18 @@ public class GenerateUtil {
         File file = new File(Constants.parentOutputPath, Constants.customFile);
         FileWriter fileWriter = new FileWriter(file);
         fileWriter.write("public interface "+entityCapitalName+"RepositoryCustom {\n\n}");
-
         fileWriter.close();
     }
 
-    public static void generateCustomImpl() {
+    public static void generateCustomImpl() throws IOException {
+
+        File file = new File(Constants.parentOutputPath, Constants.customImplFile);
+        FileWriter fileWriter = new FileWriter(file);
+        fileWriter.write("import javax.persistence.EntityManager;\n");
+        fileWriter.write("public class "+entityCapitalName+"RepositoryCustomImpl implements "+entityCapitalName+"RepositoryCustom {\n\n");
+        fileWriter.write("@Autowired\n");
+        fileWriter.write("private EntityManager em;");
+        fileWriter.write("\n\n}");
+        fileWriter.close();
     }
 }
