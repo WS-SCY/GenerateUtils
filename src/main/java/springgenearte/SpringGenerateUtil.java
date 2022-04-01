@@ -31,9 +31,9 @@ public class SpringGenerateUtil {
         generateRepository();
         generateCustom();
         generateCustomImpl();
-        generateController();
         generateService();
         generateServiceImpl();
+        generateController();
         log.info("生成代码结束");
     }
 
@@ -80,7 +80,11 @@ public class SpringGenerateUtil {
 
     private static void generateController() {
         log.info("生成Controller");
-        GenerateUtil.generateController();
+        try {
+            GenerateUtil.generateController();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void generateRepository() {

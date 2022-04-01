@@ -18,6 +18,7 @@ public class Constants {
     public static String customImplFile = "customImpl.txt";
     public static String serviceFile = "service.txt";
     public static String serviceImplFile = "serviceImpl.txt";
+    public static String controllerFile = "controller.txt";
 //    public static String inputFile = "input.txt";
 //    public static String inputFile = "input.txt";
 //    public static String inputFile = "input.txt";
