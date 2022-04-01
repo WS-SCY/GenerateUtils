@@ -23,7 +23,17 @@ public class GenerateUtil {
     public static void generateServiceImpl() {
     }
 
-    public static void generateService() {
+    public static void generateService() throws IOException {
+
+        File file = new File(Constants.parentOutputPath, Constants.serviceFile);
+        FileWriter fileWriter = new FileWriter(file);
+        fileWriter.write("public interface I"+entityCapitalName+"Service {\n\n");
+        fileWriter.write("void add("+entityCapitalName+"DTO dto);\n\n");
+        fileWriter.write("void deleteById(Long id);\n\n");
+        fileWriter.write("void update("+entityCapitalName+"DTO dto);\n\n");
+        fileWriter.write(entityCapitalName+"VO getById(Long id);\n\n");
+        fileWriter.write("}\n");
+        fileWriter.close();
     }
 
     public static void generateController() {

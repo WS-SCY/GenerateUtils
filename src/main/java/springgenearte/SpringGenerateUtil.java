@@ -67,7 +67,11 @@ public class SpringGenerateUtil {
 
     private static void generateService() {
         log.info("生成Service");
-        GenerateUtil.generateService();
+        try {
+            GenerateUtil.generateService();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void generateController() {
