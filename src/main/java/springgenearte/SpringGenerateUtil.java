@@ -67,7 +67,11 @@ public class SpringGenerateUtil {
 
     private static void generateVO() {
         log.info("生成VO");
-        GenerateUtil.generateVO();
+        try{
+            GenerateUtil.generateVO();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

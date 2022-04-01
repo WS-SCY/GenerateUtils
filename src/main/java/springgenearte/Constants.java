@@ -11,6 +11,7 @@ public class Constants {
     public static String parentOutputPath = "D:\\codes\\JavaGenerateUtils\\src\\main\\java\\springgenearte\\output";
     public static String inputFile = "input.txt";
     public static String dtoFile = "dto.txt";
+    public static String voFile = "vo.txt";
 //    public static String inputFile = "input.txt";
 //    public static String inputFile = "input.txt";
 //    public static String inputFile = "input.txt";

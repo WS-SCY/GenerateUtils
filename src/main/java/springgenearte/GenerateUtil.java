@@ -35,10 +35,21 @@ public class GenerateUtil {
     public static void generateAssembler( ) {
     }
 
-    public static void generateVO( ) {
+    public static void generateVO() throws IOException {
+        File file = new File(Constants.parentOutputPath,Constants.voFile);
+        FileWriter fileWriter = new FileWriter(file);
+        fileWriter.write("@Data\n");
+        fileWriter.write("@ApiModel(description = \""+entityDescription+"\")\n");
+        fileWriter.write("public class "+entityCapitalName+"VO {\n");
+        for(Param param:params){
+            fileWriter.write("@ApiModelProperty(value = \""+param.getDescription()+"\")\n");
+            fileWriter.write(param.getProperty()+"\n\n");
+        }
+        fileWriter.write("}\n");
+        fileWriter.close();
     }
 
-    public static void generateDTO( ) throws IOException {
+    public static void generateDTO() throws IOException {
         File file = new File(Constants.parentOutputPath,Constants.dtoFile);
         FileWriter fileWriter = new FileWriter(file);
         fileWriter.write("@Data\n");
