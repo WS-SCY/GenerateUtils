@@ -20,44 +20,52 @@ public class GenerateUtil {
     private static String entityDescription;
     private static List<Param> params;
 
-    public static void generateServiceImpl( ) {
+    public static void generateServiceImpl() {
     }
 
-    public static void generateService( ) {
+    public static void generateService() {
     }
 
-    public static void generateController( ) {
+    public static void generateController() {
     }
 
-    public static void generateRepository( ) {
+    public static void generateRepository() {
     }
 
-    public static void generateAssembler( ) {
+    public static void generateAssembler() throws IOException {
+        File file = new File(Constants.parentOutputPath, Constants.assemblerFile);
+        FileWriter fileWriter = new FileWriter(file);
+        fileWriter.write("@Mapper(componentModel = \"spring\")\n");
+        fileWriter.write("public interface " + entityCapitalName + "Assembler {\n");
+        fileWriter.write("\n"+entityCapitalName+"Entity D2E ("+entityCapitalName+"DTO dto);\n\n");
+        fileWriter.write(entityCapitalName+"VO E2V ("+entityCapitalName+"Entity entity);\n");
+        fileWriter.write("\n}\n");
+        fileWriter.close();
     }
 
     public static void generateVO() throws IOException {
-        File file = new File(Constants.parentOutputPath,Constants.voFile);
+        File file = new File(Constants.parentOutputPath, Constants.voFile);
         FileWriter fileWriter = new FileWriter(file);
         fileWriter.write("@Data\n");
-        fileWriter.write("@ApiModel(description = \""+entityDescription+"\")\n");
-        fileWriter.write("public class "+entityCapitalName+"VO {\n");
-        for(Param param:params){
-            fileWriter.write("@ApiModelProperty(value = \""+param.getDescription()+"\")\n");
-            fileWriter.write(param.getProperty()+"\n\n");
+        fileWriter.write("@ApiModel(description = \"" + entityDescription + "\")\n");
+        fileWriter.write("public class " + entityCapitalName + "VO {\n");
+        for (Param param : params) {
+            fileWriter.write("@ApiModelProperty(value = \"" + param.getDescription() + "\")\n");
+            fileWriter.write(param.getProperty() + "\n\n");
         }
         fileWriter.write("}\n");
         fileWriter.close();
     }
 
     public static void generateDTO() throws IOException {
-        File file = new File(Constants.parentOutputPath,Constants.dtoFile);
+        File file = new File(Constants.parentOutputPath, Constants.dtoFile);
         FileWriter fileWriter = new FileWriter(file);
         fileWriter.write("@Data\n");
-        fileWriter.write("@ApiModel(description = \""+entityDescription+"\")\n");
-        fileWriter.write("public class "+entityCapitalName+"DTO {\n");
-        for(Param param:params){
-            fileWriter.write("@ApiModelProperty(value = \""+param.getDescription()+"\")\n");
-            fileWriter.write(param.getProperty()+"\n\n");
+        fileWriter.write("@ApiModel(description = \"" + entityDescription + "\")\n");
+        fileWriter.write("public class " + entityCapitalName + "DTO {\n");
+        for (Param param : params) {
+            fileWriter.write("@ApiModelProperty(value = \"" + param.getDescription() + "\")\n");
+            fileWriter.write(param.getProperty() + "\n\n");
         }
         fileWriter.write("}\n");
         fileWriter.close();

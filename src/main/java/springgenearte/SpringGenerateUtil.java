@@ -62,7 +62,11 @@ public class SpringGenerateUtil {
 
     private static void generateAssembler() {
         log.info("生成Assembler");
-        GenerateUtil.generateAssembler();
+        try {
+            GenerateUtil.generateAssembler();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void generateVO() {
