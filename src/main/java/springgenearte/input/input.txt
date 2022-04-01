@@ -4,8 +4,7 @@ import com.pb.ist.education.enums.Address;
 import com.pb.ist.education.enums.IstType;
 import com.pb.ist.education.enums.StaffComposition;
 
-import javax.persistence.Column;
-import javax.persistence.Convert;
+import javax.persistence.*;
 
 /**
  * @Author: SunCY
@@ -13,6 +12,13 @@ import javax.persistence.Convert;
  * @DateTime: 2022/3/31 13:42
  **/
 public class ApplicationEntity {
+
+    /**
+     * id
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     /**
      * 所在体育组织及职务

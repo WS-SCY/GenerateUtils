@@ -20,18 +20,90 @@ public class GenerateUtil {
     private static String entityDescription;
     private static List<Param> params;
 
-    public static void generateServiceImpl() {
+    public static void generateServiceImpl() throws IOException {
+
+
+//
+//
+//
+//            }
+//
+//            @Override
+//
+//
+//            }
+//
+//            @Override
+//
+//
+//            }
+//
+//            @Override
+//
+//                return null;
+//            }
+//        }
+
+        File file = new File(Constants.parentOutputPath, Constants.serviceImplFile);
+        FileWriter fileWriter = new FileWriter(file);
+
+        fileWriter.write("@Slf4j\n");
+        fileWriter.write("@Service\n");
+        fileWriter.write("public class " + entityCapitalName + "ServiceImpl  implements I" + entityCapitalName + "Service {\n\n");
+
+
+        fileWriter.write("@Autowired\n");
+        fileWriter.write("private "+entityCapitalName+"Repository "+entityName+"Repository;\n\n" );
+        fileWriter.write("@Autowired\n");
+        fileWriter.write("private "+entityCapitalName+"Assembler "+entityName+"Assembler;\n\n" );
+
+        fileWriter.write("@Override\n");
+        fileWriter.write("public void add("+entityCapitalName+"DTO dto) {\n");
+        fileWriter.write(entityCapitalName+"Entity entity =  "+entityName+"Assembler.D2E(dto);\n");
+        fileWriter.write("if(entity.getId()!=null){\n");
+        fileWriter.write("entity.setId(null);\n");
+        fileWriter.write("log.info(\"id自动设置为null\");\n");
+        fileWriter.write("}\n");
+        fileWriter.write(entityName+"Repository.save(entity);\n");
+        fileWriter.write("}\n\n");
+
+
+        fileWriter.write("@Override\n");
+        fileWriter.write("public void deleteById(Long id) {\n");
+        fileWriter.write(entityName+"Repository.deleteById(id);\n");
+        fileWriter.write("}\n\n");
+
+        fileWriter.write("@Override\n");
+        fileWriter.write("public void update("+entityCapitalName+"DTO dto) {\n");
+        fileWriter.write(entityCapitalName+"Entity entity = "+entityName+"Assembler.D2E(dto);\n");
+        fileWriter.write("if(entity.getId()!=null){\n");
+        fileWriter.write("throw new PbServiceException(\"更新失败，id不能为null\")\n");
+        fileWriter.write("}\n");
+        fileWriter.write(entityName+"Repository.save(entity);\n");
+        fileWriter.write("}\n\n");
+
+        fileWriter.write("@Override\n");
+        fileWriter.write("public "+entityCapitalName+"VO getById(Long id) {\n");
+        fileWriter.write(entityCapitalName+"Entity entity = "+entityName+"Repository.getById(id);\n");
+        fileWriter.write(entityCapitalName+"VO vo = "+entityName+"Assembler.E2V(entity);\n");
+        fileWriter.write("return vo;\n");
+        fileWriter.write("}\n\n");
+
+
+        fileWriter.write("}\n");
+        fileWriter.close();
+
     }
 
     public static void generateService() throws IOException {
 
         File file = new File(Constants.parentOutputPath, Constants.serviceFile);
         FileWriter fileWriter = new FileWriter(file);
-        fileWriter.write("public interface I"+entityCapitalName+"Service {\n\n");
-        fileWriter.write("void add("+entityCapitalName+"DTO dto);\n\n");
+        fileWriter.write("public interface I" + entityCapitalName + "Service {\n\n");
+        fileWriter.write("void add(" + entityCapitalName + "DTO dto);\n\n");
         fileWriter.write("void deleteById(Long id);\n\n");
-        fileWriter.write("void update("+entityCapitalName+"DTO dto);\n\n");
-        fileWriter.write(entityCapitalName+"VO getById(Long id);\n\n");
+        fileWriter.write("void update(" + entityCapitalName + "DTO dto);\n\n");
+        fileWriter.write(entityCapitalName + "VO getById(Long id);\n\n");
         fileWriter.write("}\n");
         fileWriter.close();
     }
@@ -42,7 +114,7 @@ public class GenerateUtil {
     public static void generateRepository() throws IOException {
         File file = new File(Constants.parentOutputPath, Constants.repositoryFile);
         FileWriter fileWriter = new FileWriter(file);
-        fileWriter.write("public interface "+entityCapitalName+"Repository extends JpaRepository<"+entityCapitalName+"Entity, Long>, "+entityCapitalName+"RepositoryCustom {\n\n");
+        fileWriter.write("public interface " + entityCapitalName + "Repository extends JpaRepository<" + entityCapitalName + "Entity, Long>, " + entityCapitalName + "RepositoryCustom {\n\n");
         fileWriter.write("}\n");
         fileWriter.close();
     }
@@ -52,8 +124,8 @@ public class GenerateUtil {
         FileWriter fileWriter = new FileWriter(file);
         fileWriter.write("@Mapper(componentModel = \"spring\")\n");
         fileWriter.write("public interface " + entityCapitalName + "Assembler {\n");
-        fileWriter.write("\n"+entityCapitalName+"Entity D2E ("+entityCapitalName+"DTO dto);\n\n");
-        fileWriter.write(entityCapitalName+"VO E2V ("+entityCapitalName+"Entity entity);\n");
+        fileWriter.write("\n" + entityCapitalName + "Entity D2E (" + entityCapitalName + "DTO dto);\n\n");
+        fileWriter.write(entityCapitalName + "VO E2V (" + entityCapitalName + "Entity entity);\n");
         fileWriter.write("\n}\n");
         fileWriter.close();
     }
@@ -97,7 +169,7 @@ public class GenerateUtil {
     public static void generateCustom() throws IOException {
         File file = new File(Constants.parentOutputPath, Constants.customFile);
         FileWriter fileWriter = new FileWriter(file);
-        fileWriter.write("public interface "+entityCapitalName+"RepositoryCustom {\n\n}");
+        fileWriter.write("public interface " + entityCapitalName + "RepositoryCustom {\n\n}");
         fileWriter.close();
     }
 
@@ -106,7 +178,7 @@ public class GenerateUtil {
         File file = new File(Constants.parentOutputPath, Constants.customImplFile);
         FileWriter fileWriter = new FileWriter(file);
         fileWriter.write("import javax.persistence.EntityManager;\n");
-        fileWriter.write("public class "+entityCapitalName+"RepositoryCustomImpl implements "+entityCapitalName+"RepositoryCustom {\n\n");
+        fileWriter.write("public class " + entityCapitalName + "RepositoryCustomImpl implements " + entityCapitalName + "RepositoryCustom {\n\n");
         fileWriter.write("@Autowired\n");
         fileWriter.write("private EntityManager em;");
         fileWriter.write("\n\n}");
