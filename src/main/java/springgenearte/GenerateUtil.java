@@ -1,10 +1,11 @@
 package springgenearte;
 
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -56,7 +57,7 @@ public class GenerateUtil {
         fileWriter.write("@Override\n");
         fileWriter.write("public void update(" + entityCapitalName + "DTO dto) {\n");
         fileWriter.write(entityCapitalName + "Entity entity = " + entityName + "Assembler.D2E(dto);\n");
-        fileWriter.write("if(entity.getId()!=null){\n");
+        fileWriter.write("if(entity.getId()==null){\n");
         fileWriter.write("throw new PbServiceException(\"更新失败，id不能为null\");\n");
         fileWriter.write("}\n");
         fileWriter.write(entityName + "Repository.save(entity);\n");

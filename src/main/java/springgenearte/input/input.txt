@@ -1,8 +1,12 @@
 package com.pb.ist.education.entity;
 
+import com.pb.ist.common.consts.TableConstants;
 import com.pb.ist.education.enums.Address;
 import com.pb.ist.education.enums.IstType;
 import com.pb.ist.education.enums.StaffComposition;
+import lombok.Data;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
@@ -11,6 +15,13 @@ import javax.persistence.*;
  * @Description: 晋级申请书
  * @DateTime: 2022/3/31 13:42
  **/
+
+
+@Data
+@Entity
+@Table(name = TableConstants.TABLE_PREFIX + "applicatoin")
+@DynamicUpdate
+@DynamicInsert
 public class ApplicationEntity {
 
     /**
