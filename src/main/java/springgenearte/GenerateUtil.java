@@ -57,7 +57,7 @@ public class GenerateUtil {
         fileWriter.write("public void update(" + entityCapitalName + "DTO dto) {\n");
         fileWriter.write(entityCapitalName + "Entity entity = " + entityName + "Assembler.D2E(dto);\n");
         fileWriter.write("if(entity.getId()!=null){\n");
-        fileWriter.write("throw new PbServiceException(\"更新失败，id不能为null\")\n");
+        fileWriter.write("throw new PbServiceException(\"更新失败，id不能为null\");\n");
         fileWriter.write("}\n");
         fileWriter.write(entityName + "Repository.save(entity);\n");
         fileWriter.write("}\n\n");
@@ -131,34 +131,6 @@ public class GenerateUtil {
 
         fileWriter.write("}\n\n");
         fileWriter.close();
-//
-//
-//
-//
-//            }
-//
-//            @PostMapping("delete")
-//            @ApiModelProperty("删除")
-//            public Message delete(Long id){
-//                recommendationService.deleteById(id);
-//                return ResponseUtils.successResponse();
-//            }
-//
-//            @PostMapping("update")
-//            @ApiModelProperty("修改")
-//            public Message update(@RequestBody RecommendationDTO dto){
-//                recommendationService.update(dto);
-//                return ResponseUtils.successResponse();
-//            }
-//
-//            @PostMapping("get")
-//            @ApiModelProperty("根据管理员id查询")
-//            public Message retrieve(){
-//                RecommendationVO recommendationVO = recommendationService.getByAdminID();
-//                return ResponseUtils.successQueryOneResponse(recommendationVO);
-//            }
-//
-//        }
 
     }
 
