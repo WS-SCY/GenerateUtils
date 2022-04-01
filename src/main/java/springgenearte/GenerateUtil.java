@@ -29,7 +29,12 @@ public class GenerateUtil {
     public static void generateController() {
     }
 
-    public static void generateRepository() {
+    public static void generateRepository() throws IOException {
+        File file = new File(Constants.parentOutputPath, Constants.repositoryFile);
+        FileWriter fileWriter = new FileWriter(file);
+        fileWriter.write("public interface "+entityCapitalName+"Repository extends JpaRepository<"+entityCapitalName+"Entity, Long>, "+entityCapitalName+"RepositoryCustom {\n\n");
+        fileWriter.write("}\n");
+        fileWriter.close();
     }
 
     public static void generateAssembler() throws IOException {
@@ -77,5 +82,16 @@ public class GenerateUtil {
         entityName = entityInfos.get(1);
         entityDescription = entityInfos.get(2);
         params = paramList;
+    }
+
+    public static void generateCustom() throws IOException {
+        File file = new File(Constants.parentOutputPath, Constants.customFile);
+        FileWriter fileWriter = new FileWriter(file);
+        fileWriter.write("public interface "+entityCapitalName+"RepositoryCustom {\n\n}");
+
+        fileWriter.close();
+    }
+
+    public static void generateCustomImpl() {
     }
 }

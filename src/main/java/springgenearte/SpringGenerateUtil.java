@@ -29,10 +29,26 @@ public class SpringGenerateUtil {
         generateVO();
         generateAssembler();
         generateRepository();
+        generateCustom();
+        generateCustomImpl();
         generateController();
         generateService();
         generateServiceImpl();
         log.info("生成代码结束");
+    }
+
+    private static void generateCustom() {
+        log.info("生成Custom");
+        try {
+            GenerateUtil.generateCustom();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void generateCustomImpl() {
+        log.info("生成CustomImpl");
+        GenerateUtil.generateCustomImpl();
     }
 
     private static void initial() {
@@ -57,7 +73,11 @@ public class SpringGenerateUtil {
 
     private static void generateRepository() {
         log.info("生成Repository");
-        GenerateUtil.generateRepository();
+        try {
+            GenerateUtil.generateRepository();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void generateAssembler() {
@@ -77,7 +97,6 @@ public class SpringGenerateUtil {
             e.printStackTrace();
         }
     }
-
 
     public static void read() throws IOException {
         log.info("解析文本信息");
