@@ -1,9 +1,8 @@
-package com.pb.ist.education.entity;
+package com.pb.ist.promotion.entity;
 
 import com.pb.ist.common.consts.TableConstants;
-import com.pb.ist.education.enums.Address;
-import com.pb.ist.education.enums.IstType;
-import com.pb.ist.education.enums.StaffComposition;
+import com.pb.ist.education.enums.IstDirectionEnum;
+import com.pb.ist.promotion.enums.IstHierarchy;
 import lombok.Data;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -12,108 +11,45 @@ import javax.persistence.*;
 
 /**
  * @Author: SunCY
- * @Description: 晋级申请书
- * @DateTime: 2022/3/31 13:42
+ * @Description: 指导员提交的推荐意见
+ * @DateTime: 2022/4/2 11:20
  **/
 
 
 @Data
 @Entity
-@Table(name = TableConstants.TABLE_PREFIX + "applicatoin")
+@Table(name = TableConstants.TABLE_PREFIX + "real_recommendation")
 @DynamicUpdate
 @DynamicInsert
-public class ApplicationEntity {
+public class RealRecommendationEntity {
 
-    /**
-     * id
-     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
     /**
-     * 所在体育组织及职务
+     * 管理员用户id
      */
-    @Column(name = "position", columnDefinition = "varchar(255)", nullable = false)
-    private String position;
-
+    @Column(name = "admin_id", columnDefinition = "bigint", nullable = true)
+    private Long adminId;
 
     /**
-     * 市区
+     * 内容
      */
-    @Column(name = "areaId", columnDefinition = "varchar(255)", nullable = false)
-    private String areaId;
+    @Column(name = "content", columnDefinition = "varchar(255)", nullable = true)
+    private Long content;
 
     /**
-     * 从哪年开始从事社会体育指导员
+     * 管理员等级（省、市、区）
      */
-    @Column(name = "start_year", columnDefinition = "int", nullable = false)
-    private Integer startYear;
+    @Convert(converter = IstDirectionEnum.IstDirectionEnumConverter.class)
+    @Column(name = "ist_hierarchy", columnDefinition = "tinyint", nullable = false)
+    private IstHierarchy istHierarchy;
 
     /**
-     * 家庭住址
+     * 晋级申请书id
      */
-    @Column(name = "home_address", columnDefinition = "int", nullable = false)
-    private Integer homeAddress;
-
-    /**
-     * 邮政编码
-     */
-    @Column(name = "postal_code", columnDefinition = "varchar(255)", nullable = false)
-    private String postalCode;
-
-    /**
-     *
-     * 所在单位或体育组织名称
-     */
-    @Column(name = "organization_name", columnDefinition = "varchar(255)", nullable = false)
-    private String organizationName;
-
-    /**
-     *
-     * 单位地址
-     */
-    @Column(name = "organization_address", columnDefinition = "varchar(255)", nullable = false)
-    private String organizationAddress;
-
-    /**
-     *
-     * 单位联系电话
-     */
-    @Column(name = "organization_phones", columnDefinition = "varchar(255)", nullable = false)
-    private String organizationPhone;
-
-    /**
-     * 从事社会体育工作的经历与主要业绩
-     */
-    @Column(name = "experience", columnDefinition = "varchar(255)", nullable = false)
-    private String experience;
-
-    /**
-     * 于何时何单位获等级运动员、裁判员称号获聘为何等级教练员、体育教师职务
-     */
-    @Column(name = "description", columnDefinition = "varchar(255)", nullable = false)
-    private String description;
-
-    /**
-     * 指导员类型（组织管理，技能指导）
-     */
-    @Convert(converter = IstType.IstTypeConverter.class)
-    @Column(name = "type", columnDefinition = "tinyint", nullable = false)
-    private IstType istType;
-
-    /**
-     * 地区类型
-     */
-    @Convert(converter = Address.AddressConverter.class)
-    @Column(name = "address", columnDefinition = "tinyint", nullable = false)
-    private Address address;
-
-    /**
-     * 人员构成
-     */
-    @Convert(converter = StaffComposition.StaffCompositionConverter.class)
-    @Column(name = "staff_composition", columnDefinition = "tinyint", nullable = false)
-    private StaffComposition staffComposition;
-
+    @Column(name = "application_id", columnDefinition = "bigint", nullable = false)
+    private Long applicationId;
 }

@@ -123,7 +123,7 @@ public class GenerateUtil {
         fileWriter.write("return ResponseUtils.successResponse();\n");
         fileWriter.write("}\n\n");
 
-        fileWriter.write("@PostMapping(\"/getById\")\n");
+        fileWriter.write("@GetMapping(\"/getById\")\n");
         fileWriter.write("@ApiOperation(\"根据id查询\")\n");
         fileWriter.write("public Message getById(Long id){\n");
         fileWriter.write(entityCapitalName+"VO vo ="+entityName+"Service.getById(id);\n");
